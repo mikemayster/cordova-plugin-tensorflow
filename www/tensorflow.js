@@ -90,7 +90,8 @@ function registerModel(modelId, model) {
         }
     });
 
-    if (model.model_path.match(/^http/) || model.label_path.match(/^http/)) {
+    if (model.model_path.match(/^http/) || model.label_path.match(/^http/)
+	|| model.model_path.match(/\.zip#/) || model.label_path.match(/\.zip#/)) {
         model.cached = false;
     } else {
         model.cached = true;
