@@ -162,10 +162,17 @@ function loadModel(modelId, callback, errorCallback, progressCallback) {
         initClassifier();
     }
     function initClassifier() {
-        var modelPath = (model.local_model_path || model.model_path),
-            labelPath = (model.local_label_path || model.label_path);
-        modelPath = modelPath.replace(/^file:\/\//, '');
-        labelPath = labelPath.replace(/^file:\/\//, '');
+        var modelPath = (model.local_model_path || model.model_path), 
+        labelPath = (model.local_label_path || model.label_path);
+
+        if(modelPath.match(/\.zip#/) || labelPath.match(/\.zip#/)){
+            modelPath = cordova.file.applicationDirectory + modelPath;
+            labelPath = cordova.file.applicationDirectory + labelPath;
+        } else {
+            modelPath = modelPath.replace(/^file:\/\//, '');
+            labelPath = labelPath.replace(/^file:\/\//, '');
+        }
+
         progressCallback({
             'status': 'initializing',
             'label': 'Initializing classifier'
