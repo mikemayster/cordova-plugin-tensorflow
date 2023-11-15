@@ -263,7 +263,7 @@ function fetchZip(model, callback, errorCallback, progressCallback) {
             model.cached = true;
             callback();
         });
-    }, errorCallback);
+    }, errorCallback, true);
 }
 
 TensorFlow._models = models;
